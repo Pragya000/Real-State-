@@ -1,4 +1,4 @@
-import ProfileList from "../../components/profileList/profileList";
+import ProfileList from "../../components/profileList/ProfileList";
 import "./profile.scss";
 import Chat from "../../components/chat/Chat";
 import apiRequest from "../../lib/apiRequest";
