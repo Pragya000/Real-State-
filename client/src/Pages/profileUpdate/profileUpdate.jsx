@@ -3,7 +3,7 @@ import './profileUpdate.scss';
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
-import UploadWidget from "../../components/upload/uploadWidget";
+import UploadWidget from "../../components/upload/UploadWidget";
 
 
 function ProfileUpdatePage() {
