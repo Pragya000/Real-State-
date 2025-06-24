@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Home from "./Pages/home/Home";
-import List from "./Pages/list/list";
+import List from "./Pages/list/List";
 import {Layout , RequireAuth} from "./Pages/layout/layout";
 import Single from "./Pages/single/Single";
 import Profile from "./Pages/profile/Profile";
