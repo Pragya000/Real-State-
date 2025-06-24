@@ -1,20 +1,72 @@
-import { BrowserRouter , Routes, Route } from 'react-router-dom'
-import Home from './Pages/Home'
-import SignIn from './Pages/SignIn'
-import SignUp from './Pages/SignUp'
-import About from './Pages/About'
-import Profile from './Pages/Profile'
-export default function App() {
-  return (
-    <BrowserRouter> 
-    <Routes> 
-    <Route path = "/" element ={<Home />} > </Route>
-    <Route path = "/sign-in" element ={<SignIn />} > </Route>
-    <Route path = "/sign-up" element ={<SignUp />} > </Route>
-    <Route path = "/about" element ={<About />} > </Route>
-    <Route path = "/profile" element ={<Profile />} > </Route>
-    </Routes>
-    </BrowserRouter>
-  )
-}
+import {
+  BrowserRouter,
+  RouterProvider,
+  createBrowserRouter,
+  Route,
+} from "react-router-dom";
+import Home from "./Pages/home/Home";
+import List from "./Pages/list/list";
+import {Layout , RequireAuth} from "./Pages/layout/layout";
+import Single from "./Pages/single/Single";
+import Profile from "./Pages/profile/Profile";
+import Register from "./Pages/register/register";
+import Login from "./Pages/login/Login";
+import ProfileUpdate from "./Pages/profileUpdate/profileUpdate";
+import NewPostPage from "./Pages/newPost/newPost";
+import { listPageLoader, singlePageLoader , profilePageLoader} from "./lib/loaders/loaders";
 
+
+ export default function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/list",
+          element: <List />,
+          loader: listPageLoader,
+        },
+        {
+          path: "/:id",
+          element: <Single />,
+          loader: singlePageLoader,
+        },
+        
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+      ],
+    },
+    {
+      path: "/" , 
+      element: <RequireAuth/>,
+      children: [
+        {
+          path: "/profile",
+          element: <Profile />,
+          loader: profilePageLoader,
+        },
+
+        {
+          path: "/profile/update",
+          element: <ProfileUpdate />,
+        },
+        {
+          path: "/add",
+          element: <NewPostPage/>
+        },
+      ]
+    }
+  ]);
+  return <RouterProvider router={router} />;
+}
