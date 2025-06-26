@@ -10,7 +10,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
-const PORT = 8800;
+const PORT = process.env.PORT || 8800;
 
 const app = express();
 
@@ -40,8 +40,8 @@ app.use(cookieParser());
 
 
 app.use("/api/post" , postRoute);
-app.use("/api/auth" , authRoute);
-app.use("/api/test" , testRoute);
+
+
 
 
 app.use("/api/posts" , postRoute);
@@ -53,6 +53,10 @@ app.use("/api/users" , userRoute);
 app.use("/api/chats" , chatRoute);
 app.use("/api/messages" , messageRoute);
 
+
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
 
 
 app.listen(PORT, ()=>{
