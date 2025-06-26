@@ -18,7 +18,7 @@ const allowedOrigins = [
  
   process.env.CLIENT_URL,
 ].filter(Boolean); // Removes undefined/null if env is missing
-
+/*
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -30,8 +30,15 @@ app.use(
       }
     },
     credentials: true,
+    exposedHeaders: ["set-cookie"] 
   })
 );
+*/
+app.use(cors({
+  origin: "https://real-state-zeta-eight.vercel.app/",
+  credentials: true,
+   exposedHeaders: ["set-cookie"] ,
+}));
 
  console.log("Allowed Origins:", allowedOrigins);
 

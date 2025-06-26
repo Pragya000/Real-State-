@@ -5,8 +5,10 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
     //db operations
+    if (!username || !email || !password) { return 400 }
 
     const { username, email, password } = req.body;
+    console.log("REGISTER BODY:", req.body);
     try {
         //HASH THE PASSWORD
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,6 +33,7 @@ export const register = async (req, res) => {
     export const login = async(req, res) => {
         //db operations
         const { username, password } = req.body;
+         console.log("LOGIN BODY:", req.body);
         try{
         //check if user exists
         const user = await prisma.user.findUnique({
@@ -62,7 +65,7 @@ const {password: userPassword, ...userInfo} = user
             httpOnly: true,
            secure: true ,// make sure to set it true while deployment,
            maxAge: age,
-            sameSite: "Lax", 
+            sameSite: "none", 
          }).status(200).json({ message: userInfo})
         }
         catch(err){
