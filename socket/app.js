@@ -1,8 +1,10 @@
 import {Server} from "socket.io";
 
+
+
 const io = new Server ({
     cors:{
-        origin: "https://real-state-zeta-eight.vercel.app/",
+        origin: "https://real-state-zeta-eight.vercel.app",
     },
 });
 
@@ -49,6 +51,9 @@ console.log("Trying to send message to:", receiverId);
     socket.on("disconnect" , ()=>{
         removeUser(socket.id);
     })
-})
+});
 
-io.listen("4000");
+ const PORT = process.env.PORT || 4000;
+ server.listen(PORT, () => {
+   console.log(`Socket.IO server running on port ${PORT}`);
+ });
