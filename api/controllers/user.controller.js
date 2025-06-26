@@ -142,7 +142,6 @@ export const profilePosts = async( req , res) =>{
 
     
     const tokenUserId = req.userId;
-    const {password , avatar , ...inputs} = req.body;
    
     try{
        const userPosts = await prisma.post.findMany({

@@ -14,8 +14,26 @@ const PORT = 8800;
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL , credentials: true }))
- 
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.CLIENT_URL
+].filter(Boolean); // Removes undefined/null if env is missing
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
+    credentials: true,
+  })
+);
+
+ console.log("Allowed Origins:", allowedOrigins);
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -40,3 +58,5 @@ app.use("/api/messages" , messageRoute);
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`);
 })
+
+
