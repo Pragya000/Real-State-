@@ -15,8 +15,8 @@ const PORT = 8800;
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  process.env.CLIENT_URL
+ 
+  process.env.CLIENT_URL,
 ].filter(Boolean); // Removes undefined/null if env is missing
 
 app.use(
