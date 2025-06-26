@@ -1,10 +1,15 @@
 import {Server} from "socket.io";
+import { createServer } from "http";
+import express from "express";
 
+const app = express();
 
+const server = createServer(app);
 
-const io = new Server ({
+const io = new Server (server, {
     cors:{
         origin: "https://real-state-zeta-eight.vercel.app",
+        methods: ["GET", "POST"]
     },
 });
 
