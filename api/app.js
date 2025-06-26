@@ -38,7 +38,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-
+console.log("It is working fine")
 app.use("/api/post" , postRoute);
 
 
