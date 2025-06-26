@@ -35,7 +35,7 @@ app.use(
 );
 */
 app.use(cors({
-  origin: "https://real-state-zeta-eight.vercel.app/",
+  origin: "https://real-state-zeta-eight.vercel.app",
   credentials: true,
    exposedHeaders: ["set-cookie"] ,
 }));
