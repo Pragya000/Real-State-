@@ -19,21 +19,11 @@ export function Layout() {
 }
 
 export function RequireAuth() {
+  const { currentUser } = useContext(AuthContext);
 
-   const {currentUser} = useContext(AuthContext);
-   if (!currentUser) return <Navigate to="/login" />;
-  else {
-  return (
-      <div className="layout">
-      <div className="navbar">
-        <Navbar />
-      </div>
-      <div className="content">
-        <Outlet />
-      </div>
-    </div>
-  );
-}
+  if (!currentUser) return <Navigate to="/login" />;
+
+  return <Outlet />; // ✅ No extra <Navbar /> or <Layout />
 }
 
 // /* <Outlet/>  
