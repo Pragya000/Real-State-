@@ -4,12 +4,19 @@ import jwt from "jsonwebtoken";
 
 
 export const register = async (req, res) => {
+
+    
     //db operations
-    if (!username || !email || !password) { return 400 }
+    try {
 
     const { username, email, password } = req.body;
     console.log("REGISTER BODY:", req.body);
-    try {
+
+    if (!username || !email || !password) { 
+        return res.status(400).json({ message: "All fields are required" });
+    }
+
+    
         //HASH THE PASSWORD
         const hashedPassword = await bcrypt.hash(password, 10);
         //CREATING NEW USER AND SAVE TO DATA BASE
@@ -21,12 +28,12 @@ export const register = async (req, res) => {
             },
         })
 
-        console.log(newUser);
+        console.log("Created user:" , newUser);
 
         res.status(201).json({ message: "User created successfully" });
     }
     catch (err) {
-        console.log(err)
+        console.log("Register error:", err)
         res.status(500).json({ message: " Failed to create user" })
     }
 }
