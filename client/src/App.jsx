@@ -1,22 +1,4 @@
-import {
-  BrowserRouter,
-  RouterProvider,
-  createBrowserRouter,
-  Route,
-} from "react-router-dom";
-import Home from "./Pages/home/Home";
-import List from "./Pages/list/List";
-import {Layout , RequireAuth} from "./Pages/layout/Layout";
-import Single from "./Pages/single/Single";
-import Profile from "./Pages/profile/Profile";
-import Register from "./Pages/register/Register";
-import Login from "./Pages/login/Login";
-import ProfileUpdate from "./Pages/profileUpdate/profileUpdate";
-import NewPostPage from "./Pages/newPost/NewPost";
-import { listPageLoader, singlePageLoader , profilePageLoader} from "./lib/loaders/loaders";
-
-
- export default function App() {
+export default function App() {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -36,7 +18,6 @@ import { listPageLoader, singlePageLoader , profilePageLoader} from "./lib/loade
           element: <Single />,
           loader: singlePageLoader,
         },
-        
         {
           path: "/register",
           element: <Register />,
@@ -45,28 +26,23 @@ import { listPageLoader, singlePageLoader , profilePageLoader} from "./lib/loade
           path: "/login",
           element: <Login />,
         },
-      ],
-    },
-    {
-      path: "/" , 
-      element: <RequireAuth/>,
-      children: [
+        // ✅ Protected routes (RequireAuth wraps element directly)
         {
           path: "/profile",
-          element: <Profile />,
+          element: <RequireAuth><Profile /></RequireAuth>,
           loader: profilePageLoader,
         },
-
         {
           path: "/profile/update",
-          element: <ProfileUpdate />,
+          element: <RequireAuth><ProfileUpdate /></RequireAuth>,
         },
         {
           path: "/add",
-          element: <NewPostPage/>
+          element: <RequireAuth><NewPostPage /></RequireAuth>,
         },
-      ]
-    }
+      ],
+    },
   ]);
+
   return <RouterProvider router={router} />;
 }
