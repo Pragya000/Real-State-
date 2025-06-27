@@ -1,3 +1,21 @@
+import {
+  BrowserRouter,
+  RouterProvider,
+  createBrowserRouter,
+  Route,
+} from "react-router-dom";
+import Home from "./Pages/home/Home";
+import List from "./Pages/list/List";
+import {Layout , RequireAuth} from "./Pages/layout/Layout";
+import Single from "./Pages/single/Single";
+import Profile from "./Pages/profile/Profile";
+import Register from "./Pages/register/Register";
+import Login from "./Pages/login/Login";
+import ProfileUpdate from "./Pages/profileUpdate/profileUpdate";
+import NewPostPage from "./Pages/newPost/NewPost";
+import { listPageLoader, singlePageLoader , profilePageLoader} from "./lib/loaders/loaders";
+
+
 export default function App() {
   const router = createBrowserRouter([
     {
