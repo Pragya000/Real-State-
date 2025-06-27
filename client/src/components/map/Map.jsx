@@ -3,9 +3,21 @@ import './map.scss';
 import { MapContainer, TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import Pin from "../pin/Pin";
+import L from "leaflet"; 
+import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
+import iconUrl from "leaflet/dist/images/marker-icon.png";
+import shadowUrl from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+});
 
 function Map( {items} ) {
- 
+// Fix default icon path
+
      
   return (
    <MapContainer center={ items.length === 1 ? [items[0].latitude , items[0].longitude]: [52.4797 , -1.90269] } zoom={6} scrollWheelZoom={true} className='map'>
