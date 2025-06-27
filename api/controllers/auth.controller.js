@@ -69,7 +69,7 @@ const {password: userPassword, ...userInfo} = user
          }).status(200).json({ message: userInfo})
         }
         catch(err){
-            console.log(first)
+            console.log("Login error:", err); 
             res.status(500).json({messge: "Failed to login!"})
         }
 
