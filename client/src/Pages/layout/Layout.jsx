@@ -18,12 +18,12 @@ export function Layout() {
   );
 }
 
-export function RequireAuth() {
+export function RequireAuth({children}) {
   const { currentUser } = useContext(AuthContext);
 
   if (!currentUser) return <Navigate to="/login" />;
 
-  return <Outlet />; // ✅ No extra <Navbar /> or <Layout />
+   return children; // ✅ No extra <Navbar /> or <Layout />
 }
 
 // /* <Outlet/>  

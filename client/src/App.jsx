@@ -44,6 +44,7 @@ export default function App() {
           path: "/login",
           element: <Login />,
         },
+        
         // ✅ Protected routes (RequireAuth wraps element directly)
         {
           path: "/profile",
